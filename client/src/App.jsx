@@ -3,6 +3,7 @@ import axios from 'axios';
 import ClientList from './components/ClientList';
 import TaskList from './components/TaskList';
 import TaskForm from './components/TaskForm';
+import API from './api';
 
 function App() {
   const [clients, setClients] = useState([]);
@@ -11,7 +12,7 @@ function App() {
 
   // 1. Fetch all clients from the database on initial load
   useEffect(() => {
-    axios.get('/api/clients')
+    API.get('/clients')
       .then(res => setClients(res.data))
       .catch(err => console.error("Error fetching clients:", err));
   }, []);
@@ -19,7 +20,7 @@ function App() {
   // 2. Fetch tasks for the specific client whenever 'selectedClient' changes
   useEffect(() => {
     if (selectedClient) {
-      axios.get(`/api/tasks/${selectedClient._id}`)
+      API.get(`/tasks/${selectedClient._id}`)
         .then(res => setTasks(res.data))
         .catch(err => console.error("Error fetching tasks:", err));
     }
@@ -33,7 +34,7 @@ function App() {
 
   // 4. Logic to update task status (Pending -> Completed)
   const handleUpdateStatus = (taskId, newStatus) => {
-    axios.patch(`/api/tasks/${taskId}`, { status: newStatus })
+    API.patch(`/tasks/${taskId}`, { status: newStatus })
       .then(res => {
         setTasks(prev => prev.map(t => t._id === taskId ? res.data : t));
       })

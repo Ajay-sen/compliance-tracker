@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import API from '../api';
 
 const AddClientForm = ({ onClientAdded }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,7 +11,7 @@ const AddClientForm = ({ onClientAdded }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('/api/clients', {
+      const res = await API.post('/clients', {
         company_name: name,
         country: country,
         entity_type: type

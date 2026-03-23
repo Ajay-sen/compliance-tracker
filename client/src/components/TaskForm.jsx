@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import API from '../api';
 
 const TaskForm = ({ clientId, onTaskAdded }) => {
   const [formData, setFormData] = useState({
@@ -12,7 +13,7 @@ const TaskForm = ({ clientId, onTaskAdded }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/api/tasks', { ...formData, client_id: clientId });
+      const response = await API.post('/tasks', { ...formData, client_id: clientId });
       onTaskAdded(response.data);
       setFormData({ title: '', category: 'GST', due_date: '', priority: 'Medium' });
     } catch (err) {
