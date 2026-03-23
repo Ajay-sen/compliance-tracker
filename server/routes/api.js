@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Client = require('../models/Client');
+const Client = require('../models/Clients');
 const Task = require('../models/Task');
 
 // 1. Get all clients
