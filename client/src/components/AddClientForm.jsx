@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import API from '../api';
+import API from '../api.js';
 
 const AddClientForm = ({ onClientAdded }) => {
   const [isOpen, setIsOpen] = useState(false);
