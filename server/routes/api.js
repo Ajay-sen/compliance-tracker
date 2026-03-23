@@ -48,4 +48,15 @@ router.patch('/tasks/:id', async (req, res) => {
     }
 });
 
+// Add a new client
+router.post('/clients', async (req, res) => {
+    try {
+        const newClient = new Client(req.body);
+        const savedClient = await newClient.save();
+        res.status(201).json(savedClient);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+});
+
 module.exports = router;
